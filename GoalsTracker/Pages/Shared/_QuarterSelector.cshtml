@@ -1,0 +1,12 @@
+﻿@model GoalsTracker.Models.QuarterSelectorModel
+
+<div class="form-row">
+    <select asp-for="QuarterOption" asp-items="Model.Options" class="styled-input" onchange="toggleCustomFields();"></select>
+
+    <div id="@Model.CustomFieldContainerId" class="custom-dates" style="display: none;">
+        <input type="date" asp-for="StartDate" class="styled-input" />
+        <input type="date" asp-for="EndDate" class="styled-input" />
+    </div>
+
+    <button type="submit" class="styled-button">Submit</button>
+</div>

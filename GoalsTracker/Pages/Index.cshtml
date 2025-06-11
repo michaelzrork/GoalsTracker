@@ -1,0 +1,76 @@
+﻿@page  
+@model GoalsTracker.Pages.IndexModel  
+@{  
+    ViewData["Title"] = "Home Page";  
+}  
+
+@using GoalsTracker.Helpers;  
+
+@*******************************  
+         TIME ENTRIES  
+*******************************@  
+
+<h1>OE Hours Tracked</h1>  
+
+<form method="post">  
+    <input type="date" class="styled-input" asp-for="NewTimeEntry.Date" required />  
+    <input type="number" class="styled-input" placeholder="Minutes Worked" asp-for="NewTimeEntry.MinutesWorked" required />  
+    <button type="submit" class="styled-save-button styled-button">Add New Entry</button>  
+</form>  
+
+<table class="entry-table">  
+    <thead>  
+        <tr>  
+            <th>Date</th>  
+            <th>Hours Worked</th>  
+            <th class="button-column"></th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+        @foreach (var entry in Model.TimeEntries)  
+        {  
+            @await Html.PartialAsync("_EntryTableRow", new {
+                Id = entry.Id,
+                Date = entry.Date.ToShortDateString(),
+                ValueDisplay = FormatUtilities.GetHoursAndMinutes(entry.MinutesWorked),
+                DeleteHandler = "Delete",
+                EditPage = "/EditTimeEntry"
+            })
+    }  
+    </tbody>  
+</table>  
+
+<br />  
+
+@*******************************  
+         CASE ENTRIES  
+********************************@  
+<h1>Cases Closed</h1>  
+
+<form method="post" asp-page-handler="Case">  
+    <input type="date" class="styled-input" asp-for="NewCaseEntry.DateClosed" required />  
+    <input type="number" class="styled-input" placeholder="Cases Closed" asp-for="NewCaseEntry.CasesClosed" required />  
+    <button type="submit" class="styled-save-button styled-button">Add New Entry</button>  
+</form>  
+
+<table class="entry-table">  
+    <thead>  
+        <tr>  
+            <th>Date</th>  
+            <th>Cases Closed</th>  
+            <th class="button-column"></th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+        @foreach (var caseEntry in Model.CaseEntries)  
+        {  
+            @await Html.PartialAsync("_EntryTableRow", new {
+                Id = caseEntry.Id,
+                Date = caseEntry.DateClosed.ToShortDateString(),
+                ValueDisplay = caseEntry.CasesClosed,
+                DeleteHandler = "CaseDelete",
+                EditPage = "/EditCaseEntry"
+            })
+        }  
+    </tbody>  
+</table>

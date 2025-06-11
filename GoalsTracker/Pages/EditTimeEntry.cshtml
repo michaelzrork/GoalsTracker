@@ -1,0 +1,50 @@
+﻿@page "{id:int}"
+@model GoalsTracker.Pages.EditTimeEntryModel
+@{
+    ViewData["Title"] = "Time Entry Edit";
+}
+@using GoalsTracker.Helpers;
+
+<h1>Time Entry Edit</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Entry.Id" />
+    <input type="hidden" asp-for="ReturnUrl" />
+
+    <div>
+        <input class="styled-input" asp-for="Entry.Date" type="date" />
+
+        <input class="styled-input" asp-for="Entry.MinutesWorked" type="text"
+               value="@Model.Entry.MinutesWorked minutes"
+               onfocus="this.value=this.value.replace(' minutes','')"
+               onblur="if(this.value) this.value=this.value + ' minutes'" />
+
+        <button type="submit" class="styled-save-button styled-button">Save Changes</button>
+        <a class="styled-cancel-button styled-button" href="@(Model.ReturnUrl ?? Url.Page("/TimeEntries"))">Cancel</a>
+    </div>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const input = document.querySelector('[name="Entry.MinutesWorked"]');
+
+    // Save the original numeric value on page load
+    const originalValue = input.value.replace(' minutes', '').trim();
+
+    form.addEventListener('submit', function (e) {
+        let value = input.value.replace(' minutes', '').trim();
+
+        // THROWS AN ERROR WHEN IT GETS ANYTHING OTHER THAN NUMBERS AND RESETS THE INPUT VALUE TO THE ORIGINAL VALUE IF NOT A NUMBER
+        if (!/^\d+$/.test(value)) {
+            e.preventDefault(); // Stop form submission
+            alert("Non-numerical characters found. Please try again with whole numbers only.");
+            input.value = originalValue; // Reset input to original value
+            input.focus();
+            return;
+        }
+
+        input.value = value; // Strip label before submission
+    });
+</script>
+
+

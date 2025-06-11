@@ -1,0 +1,207 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/****************************************
+          TABLE & CELL STYLES
+/****************************************/
+
+.entry-item {
+    position: relative;
+}
+
+.entry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+    .entry-table th,
+    .entry-table td {
+        border: 1px solid #ccc;
+        padding: 16px 24px;
+        text-align: left;
+    }
+
+    .entry-table th {
+        background-color: #f4f4f4;
+    }
+
+/****************************************
+         EDIT & DELETE BUTTONS
+/****************************************/
+
+.delete-form {
+    display: inline;
+}
+
+.entry-table td.button-column,
+.entry-table th.button-column {
+    padding: 8px !important;
+    border: none !important;
+    background-color: Background !important;
+}
+
+.delete-button:hover {
+    color: red;
+}
+
+.edit-button:hover {
+    color: dodgerblue;
+}
+
+.edit-button,
+.delete-button {
+    border: none;
+    background: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: lightgray;
+    transition: color 0.2s ease;
+    visibility: hidden;
+}
+
+.cell-buttons {
+    /*    position: relative;*/
+    padding: 0;
+}
+
+    .cell-buttons:hover .edit-button {
+        visibility: visible;
+    }
+
+    .cell-buttons:hover .delete-button {
+        visibility: visible;
+    }
+
+.entry-item:hover .edit-button-row {
+    visibility: visible;
+}
+
+.entry-item:hover .delete-button {
+    visibility: visible;
+}
+
+.cell-buttons:hover .button-group {
+    visibility: visible;
+}
+
+.cell-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    visibility: hidden;
+    flex-shrink: 0;
+}
+
+/****************************************
+     INPUT FIELDS & ACTION BUTTONS
+/****************************************/
+
+.styled-button {
+    background-color: lightskyblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-decoration: none;
+}
+
+    .styled-button:hover {
+        background-color: skyblue;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+        color: white;
+    }
+
+    .styled-button:active {
+        transform: translateY(1.5px);
+        color: white;
+    }
+
+.styled-save-button {
+    background-color: mediumseagreen;
+}
+
+    .styled-save-button:hover {
+        background-color: limegreen;
+    }
+
+    .styled-save-button:active {
+        background-color: darkgreen;
+    }
+
+.styled-cancel-button {
+    padding-bottom: 12px;
+    background-color: lightcoral;
+}
+
+    .styled-cancel-button:hover {
+        background-color: red;
+    }
+
+    .styled-cancel-button:active {
+        background-color: darkred;
+    }
+
+.styled-input {
+    color: black;
+    padding: 10px 20px;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 8px;
+    font-size: 1rem;
+    /*    font-weight: bold;*/
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+    .styled-input:hover {
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+.form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+
+.custom-dates {
+    display: flex;
+    gap: 12px;
+}

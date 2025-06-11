@@ -1,0 +1,54 @@
+﻿@page
+@model GoalsTracker.Pages.TimeEntriesModel
+@{
+    ViewData["Title"] = "Time Entries";
+}
+
+@using GoalsTracker.Helpers;
+
+<h1>Time Entries</h1>
+<br />
+<h4>Select a date</h4>
+<form method="post">
+    <input type="date" class="styled-input" asp-for="StartDate" required />
+    <button type="submit" class="styled-button">Search</button>
+</form>
+@if (Model.HasSearched)
+{
+    @if (Model.Entries.Any())
+    {
+        <table class="entry-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Hours Worked</th>
+                    <th class="button-column"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in Model.Entries)
+                {
+                    @await Html.PartialAsync("_EntryTableRow", new {
+                    Id = entry.Id,
+                    Date = entry.Date.ToShortDateString(),
+                    ValueDisplay = entry.MinutesWorked,
+                    DeleteHandler = "Delete",
+                    EditPage = "/EditTimeEntry"
+                })
+                }
+            </tbody>
+        </table>
+
+
+        <br />
+
+        <h3>
+            Total Hours Worked Since <span style="color: blue;">@Model.StartDate.ToString("MMMM") @Model.StartDate.Day, @Model.StartDate.Year</span>:
+        </h3>
+        <h2>@FormatUtilities.GetHoursAndMinutes(Model.TotalMinutesWorked)</h2>
+    }
+    else
+    {
+        <p>No Time Entries Found</p>
+    }
+    }

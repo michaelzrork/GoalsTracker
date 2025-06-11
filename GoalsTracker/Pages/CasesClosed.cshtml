@@ -1,0 +1,97 @@
+﻿@page
+@model GoalsTracker.Pages.CasesClosedModel
+@{
+    ViewData["Title"] = "Cases Closed";
+}
+
+@using GoalsTracker.Helpers;
+
+<h1>Cases Closed</h1>
+<br />
+<h5>Select a quarter or custom date range</h5>
+
+@* <form method="post">
+    <div class="form-row">
+        <select asp-for="QuarterOption" asp-items="Model.Options" class="styled-input" onchange="toggleCustomFields();"></select>
+
+        <div id="custom-fields" class="custom-dates" style="display: none;">
+            <input type="date" asp-for="StartDate" class="styled-input" />
+            <input type="date" asp-for="EndDate" class="styled-input" />
+        </div>
+
+        <button type="submit" class="styled-button">Submit</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function toggleCustomFields() {
+            const quarterOption = document.querySelector('[name="QuarterOption"]').value;
+            const customFields = document.getElementById('custom-fields');
+            customFields.style.display = quarterOption === "Custom" ? "block" : "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", toggleCustomFields);
+    </script>
+} *@
+
+<form method="post">
+    @Html.Partial("_QuarterSelector", Model.QuarterSelector)
+</form>
+
+
+
+<br />
+@if (Model.QuarterSelector.QuarterOption == "Custom")
+{
+    <h4>
+        Quarters <span style="color: blue;">@Model.QuarterNumber</span> through <span style="color: blue;">@Model.EndDateQuarterNumber</span>
+    </h4>
+    ;
+}
+else
+{
+    <h4>
+        Quarter <span style="color: blue;">@Model.QuarterNumber</span>
+    </h4>
+    ;
+}
+
+<h5>
+    Starting Date: @DateUtilities.GetLongDate(Model.QuarterSelector.StartDate)
+    <br />Ending Date: @DateUtilities.GetLongDate(Model.QuarterSelector.EndDate)
+</h5>
+@if (Model.CasesClosed.Any())
+{
+    <table class="entry-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Cases Closed</th>
+                <th class="button-column"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var caseEntry in Model.CasesClosed)
+            {
+                @await Html.PartialAsync("_EntryTableRow", new {
+                Id = caseEntry.Id,
+                Date = caseEntry.DateClosed.ToShortDateString(),
+                ValueDisplay = caseEntry.CasesClosed,
+                DeleteHandler = "CaseDelete",
+                EditPage = "/EditCaseEntry"
+                })
+                }
+    </tbody>
+</table>
+<br />
+<h4>
+    Total Cases Closed: @Model.TotalCasesClosed<br />
+    Average Cases Closed: @Model.AverageCasesClosed
+</h4>
+}
+else
+{
+    <br />
+    <h5 style="color: red;">No Case Entries found for selected dates. Please update your dates and try again.</h5>
+}
