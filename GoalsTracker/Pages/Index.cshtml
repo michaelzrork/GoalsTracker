@@ -13,7 +13,7 @@
 <h1>OE Hours Tracked</h1>  
 
 <form method="post">  
-    <input type="date" class="styled-input" asp-for="NewTimeEntry.Date" required />  
+    <input type="date" class="styled-input" asp-for="EntryDate" required />  
     <input type="number" class="styled-input" placeholder="Minutes Worked" asp-for="NewTimeEntry.MinutesWorked" required />  
     <button type="submit" class="styled-save-button styled-button">Add New Entry</button>  
 </form>  
@@ -48,7 +48,7 @@
 <h1>Cases Closed</h1>  
 
 <form method="post" asp-page-handler="Case">  
-    <input type="date" class="styled-input" asp-for="NewCaseEntry.DateClosed" required />  
+    <input type="date" class="styled-input" asp-for="EntryDate" required />  
     <input type="number" class="styled-input" placeholder="Cases Closed" asp-for="NewCaseEntry.CasesClosed" required />  
     <button type="submit" class="styled-save-button styled-button">Add New Entry</button>  
 </form>  

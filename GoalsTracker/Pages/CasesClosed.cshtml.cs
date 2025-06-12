@@ -19,7 +19,7 @@ namespace GoalsTracker.Pages
         }
 
 
-        public int QuarterStartMonth { get; set; } // e.g., "January", "April", etc.
+        public int QuarterStartMonth { get; set; } 
 
         [BindProperty(SupportsGet = true)]
         public DateTime StartDate { get; set; }
@@ -85,7 +85,7 @@ namespace GoalsTracker.Pages
                 .ToList();
 
             TotalCasesClosed = CasesClosed.Sum(e => e.CasesClosed);
-            AverageCasesClosed = TotalCasesClosed > 0 ? (decimal)TotalCasesClosed / CasesClosed.Count : 0;
+            AverageCasesClosed = @MathUtilities.GetAverage(TotalCasesClosed,CasesClosed.Count,2);
         }
 
         public void OnPost()
@@ -119,9 +119,7 @@ namespace GoalsTracker.Pages
                 .ToList();
 
             TotalCasesClosed = CasesClosed.Sum(e => e.CasesClosed);
-            AverageCasesClosed = TotalCasesClosed > 0
-                ? (decimal)TotalCasesClosed / CasesClosed.Count
-                : 0;
+            AverageCasesClosed = @MathUtilities.GetAverage(TotalCasesClosed, CasesClosed.Count, 2);
         }
 
         public IActionResult OnPostDelete(int id)

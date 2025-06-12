@@ -14,7 +14,7 @@ namespace GoalsTracker.Pages
         {
             _db = db;
         }
-
+            
         [BindProperty]
         public TimeEntry NewTimeEntry { get; set; }
 
@@ -24,10 +24,22 @@ namespace GoalsTracker.Pages
         public List<TimeEntry> TimeEntries { get; set; }
         public List<CaseEntry> CaseEntries { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public DateTime EntryDate { get; set; }
+
         public void OnGet()
         {
             TimeEntries = _db.TimeEntries.OrderByDescending(e => e.Date).ToList();
             CaseEntries = _db.CaseEntries.OrderByDescending(c => c.DateClosed).ToList();
+
+            if (EntryDate != default)
+            {
+                
+            }
+            else
+            {
+                EntryDate = DateTime.Today; // default only if not set
+            }
         }
 
         public IActionResult OnPost()
@@ -35,7 +47,7 @@ namespace GoalsTracker.Pages
             if (!ModelState.IsValid)
                 return Page();
 
-            var existingEntry = _db.TimeEntries.FirstOrDefault(e => e.Date == NewTimeEntry.Date);
+            var existingEntry = _db.TimeEntries.FirstOrDefault(e => e.Date == EntryDate);
             if (existingEntry != null)
             {
                 existingEntry.MinutesWorked += NewTimeEntry.MinutesWorked;
@@ -43,6 +55,7 @@ namespace GoalsTracker.Pages
             }
             else
             {
+                NewTimeEntry.Date = EntryDate;
                 _db.TimeEntries.Add(NewTimeEntry);
             }
             _db.SaveChanges();
@@ -79,7 +92,7 @@ namespace GoalsTracker.Pages
             if (!ModelState.IsValid)
                 return Page();
 
-            var existingEntry = _db.CaseEntries.FirstOrDefault(e => e.DateClosed == NewCaseEntry.DateClosed);
+            var existingEntry = _db.CaseEntries.FirstOrDefault(e => e.DateClosed == EntryDate);
             if (existingEntry != null)
             {
                 existingEntry.CasesClosed += NewCaseEntry.CasesClosed;
@@ -88,6 +101,7 @@ namespace GoalsTracker.Pages
             else
             {
                 _db.CaseEntries.Add(NewCaseEntry);
+                NewCaseEntry.DateClosed = EntryDate;
             }
             _db.SaveChanges();
 
