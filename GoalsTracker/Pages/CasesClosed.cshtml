@@ -10,7 +10,7 @@
 <br />
 <h5>Select a quarter or custom date range</h5>
 
-@* <form method="post">
+<form method="post">
     <div class="form-row">
         <select asp-for="QuarterOption" asp-items="Model.Options" class="styled-input" onchange="toggleCustomFields();"></select>
 
@@ -33,16 +33,16 @@
 
         document.addEventListener("DOMContentLoaded", toggleCustomFields);
     </script>
-} *@
+}
 
-<form method="post">
+@* <form method="post">
     @Html.Partial("_QuarterSelector", Model.QuarterSelector)
-</form>
+</form> *@
 
 
 
 <br />
-@if (Model.QuarterSelector.QuarterOption == "Custom")
+@if (Model.QuarterOption == "Custom")
 {
     <h4>
         Quarters <span style="color: blue;">@Model.QuarterNumber</span> through <span style="color: blue;">@Model.EndDateQuarterNumber</span>
@@ -58,8 +58,8 @@ else
 }
 
 <h5>
-    Starting Date: @DateUtilities.GetLongDate(Model.QuarterSelector.StartDate)
-    <br />Ending Date: @DateUtilities.GetLongDate(Model.QuarterSelector.EndDate)
+    Starting Date: @DateUtilities.GetLongDate(Model.StartDate)
+    <br />Ending Date: @DateUtilities.GetLongDate(Model.EndDate)
 </h5>
 @if (Model.CasesClosed.Any())
 {
