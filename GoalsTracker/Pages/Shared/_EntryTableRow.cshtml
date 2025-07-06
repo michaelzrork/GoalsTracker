@@ -5,7 +5,7 @@
         <div class="cell-content">
             <span>@Model.Date</span>
             <div class="button-group">
-                <a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button" title="Edit Entry">✎ Edit</a>
+                @* <a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button" title="Edit Entry">✎ Edit</a> *@
             </div>
         </div>
     </td>
@@ -14,13 +14,13 @@
         <div class="cell-content">
             <span>@Model.ValueDisplay</span>
             <div class="button-group">
-                <a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button" title="Edit Entry">✎ Edit</a>
+                @* <a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button" title="Edit Entry">✎ Edit</a> *@
             </div>
         </div>
     </td>
 
     <td class="button-column cell-buttons">
-        @*<a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button edit-button-row" title="Edit Entry">✎ Edit</a>*@
+        <a asp-page="@Model.EditPage" asp-route-id="@Model.Id" class="edit-button edit-button-row" title="Edit Entry">✎ Edit</a>
         <form method="post" asp-page-handler="@Model.DeleteHandler" asp-route-id="@Model.Id" class="delete-form">
             <button type="submit"
                     title="Delete Entry"

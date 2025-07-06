@@ -35,8 +35,8 @@ namespace GoalsTracker.Pages
                 HasSearched = true;
 
                 Entries = _db.TimeEntries
-                    .Where(e => e.Date >= StartDate)
-                    .OrderBy(e => e.Date)
+                    .Where(e => e.LogDate >= StartDate)
+                    .OrderBy(e => e.LogDate)
                     .ThenBy(e => e.MinutesWorked)
                     .ToList();
 
@@ -54,8 +54,8 @@ namespace GoalsTracker.Pages
             HasSearched = true;
 
             Entries = _db.TimeEntries
-                .Where(predicate: e => e.Date >= StartDate)
-                .OrderBy(e => e.Date)
+                .Where(predicate: e => e.LogDate >= StartDate)
+                .OrderBy(e => e.LogDate)
                 .ThenBy(e => e.MinutesWorked)
                 .ToList();
 

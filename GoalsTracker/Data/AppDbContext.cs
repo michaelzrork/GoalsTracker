@@ -9,15 +9,20 @@ namespace GoalsTracker.Data
 
         public DbSet<TimeEntry> TimeEntries { get; set; }
         public DbSet<CaseEntry> CaseEntries { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TimeEntry>()
-                .HasIndex(e => e.Date)
+                .HasIndex(e => e.LogDate)
                 .IsUnique();
 
             modelBuilder.Entity<CaseEntry>()
                 .HasIndex(e => e.DateClosed)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
                 .IsUnique();
         }
     }

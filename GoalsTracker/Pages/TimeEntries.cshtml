@@ -30,7 +30,7 @@
                 {
                     @await Html.PartialAsync("_EntryTableRow", new {
                     Id = entry.Id,
-                    Date = entry.Date.ToShortDateString(),
+                    Date = entry.LogDate.ToShortDateString(),
                     ValueDisplay = entry.MinutesWorked,
                     DeleteHandler = "Delete",
                     EditPage = "/EditTimeEntry"

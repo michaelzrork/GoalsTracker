@@ -23,29 +23,11 @@
     </div>
 </form>
 
-@section Scripts {
-    <script>
-        function toggleCustomFields() {
-            const quarterOption = document.querySelector('[name="QuarterOption"]').value;
-            const customFields = document.getElementById('custom-fields');
-            customFields.style.display = quarterOption === "Custom" ? "block" : "none";
-        }
-
-        document.addEventListener("DOMContentLoaded", toggleCustomFields);
-    </script>
-}
-
-@* <form method="post">
-    @Html.Partial("_QuarterSelector", Model.QuarterSelector)
-</form> *@
-
-
-
 <br />
 @if (Model.QuarterOption == "Custom")
 {
     <h4>
-        Quarters <span style="color: blue;">@Model.QuarterNumber</span> through <span style="color: blue;">@Model.EndDateQuarterNumber</span>
+        Quarter @Model.QuarterNumber (@Model.StartDate.Year) through Quarter @Model.EndDateQuarterNumber (@Model.EndDate.Year)
     </h4>
     ;
 }
@@ -94,4 +76,16 @@ else
 {
     <br />
     <h5 style="color: red;">No Case Entries found for selected dates. Please update your dates and try again.</h5>
+}
+
+@section Scripts {
+    <script>
+        function toggleCustomFields() {
+            const quarterOption = document.querySelector('[name="QuarterOption"]').value;
+            const customFields = document.getElementById('custom-fields');
+            customFields.style.display = quarterOption === "Custom" ? "block" : "none";
+        }
+
+        document.addEventListener("DOMContentLoaded", toggleCustomFields);
+    </script>
 }

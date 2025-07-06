@@ -29,7 +29,7 @@ namespace GoalsTracker.Pages
 
         public void OnGet()
         {
-            TimeEntries = _db.TimeEntries.OrderByDescending(e => e.Date).ToList();
+            TimeEntries = _db.TimeEntries.OrderByDescending(e => e.LogDate).ToList();
             CaseEntries = _db.CaseEntries.OrderByDescending(c => c.DateClosed).ToList();
 
             if (EntryDate != default)
@@ -47,7 +47,7 @@ namespace GoalsTracker.Pages
             if (!ModelState.IsValid)
                 return Page();
 
-            var existingEntry = _db.TimeEntries.FirstOrDefault(e => e.Date == EntryDate);
+            var existingEntry = _db.TimeEntries.FirstOrDefault(e => e.LogDate == EntryDate);
             if (existingEntry != null)
             {
                 existingEntry.MinutesWorked += NewTimeEntry.MinutesWorked;
@@ -55,7 +55,7 @@ namespace GoalsTracker.Pages
             }
             else
             {
-                NewTimeEntry.Date = EntryDate;
+                NewTimeEntry.LogDate = EntryDate;
                 _db.TimeEntries.Add(NewTimeEntry);
             }
             _db.SaveChanges();

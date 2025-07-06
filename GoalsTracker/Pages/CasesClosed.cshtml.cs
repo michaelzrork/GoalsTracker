@@ -18,9 +18,6 @@ namespace GoalsTracker.Pages
             _db = db;
         }
 
-
-        public int QuarterStartMonth { get; set; } 
-
         [BindProperty(SupportsGet = true)]
         public DateTime StartDate { get; set; }
 
@@ -32,11 +29,6 @@ namespace GoalsTracker.Pages
         public int TotalCasesClosed { get; set; }
 
         public int QuarterNumber { get; set; }
-
-        public bool HasSearched { get; set; }
-
-        public DateTime LastQuarterStartDate { get; set; }
-        public DateTime LastQuarterEndDate { get; set; }
 
         public decimal AverageCasesClosed { get; set; }
 

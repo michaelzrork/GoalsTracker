@@ -1,0 +1,63 @@
+﻿@page
+@model GoalsTracker.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-container">
+    <h1>Login</h1>
+    <form method="post">
+        <div accesskey="u">
+            <label asp-for="User">Username</label>
+            <input asp-for="User" class="form-control" required />
+            <span asp-validation-for="User" class="text-danger"></span>
+        </div>
+        <div accesskey="p">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <button type="submit" class="styled-button styled-save-button">Login</button>
+            <a class="styled-button styled-cancel-button" href="@Url.Page("/Index")">Cancel</a>
+        </div>
+        <div class="form-group">
+            <span asp-validation-summary="ModelOnly" class="text-danger"></span>
+        </div>
+    </form>
+    <div class="login-footer">
+        <p>Don't have an account? <a href="@Url.Page("/Register")">Register here</a>.</p>
+        <p><a href="@Url.Page("/ForgotPassword")">Forgot your password?</a></p>
+    </div>
+</div>
+<style>
+    .login-container {
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        margin-right: 10px;
+    }
+
+    .login-footer {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>

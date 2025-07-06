@@ -46,7 +46,7 @@ namespace GoalsTracker.Pages
                 return NotFound();
             }
 
-            existing.Date = Entry.Date;
+            existing.LogDate = Entry.LogDate;
             existing.MinutesWorked = Entry.MinutesWorked;
             _db.SaveChanges();
 
@@ -58,4 +58,4 @@ namespace GoalsTracker.Pages
             return RedirectToPage();
         }
     }
-}
+}   
