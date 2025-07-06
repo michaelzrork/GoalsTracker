@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoalsTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250608043538_InitialCreate")]
+    [Migration("20250706183631_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.5");
 
             modelBuilder.Entity("GoalsTracker.Models.CaseEntry", b =>
                 {
@@ -33,6 +33,9 @@ namespace GoalsTracker.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DateClosed")
+                        .IsUnique();
 
                     b.ToTable("CaseEntries");
                 });
@@ -50,6 +53,9 @@ namespace GoalsTracker.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Date")
+                        .IsUnique();
 
                     b.ToTable("TimeEntries");
                 });

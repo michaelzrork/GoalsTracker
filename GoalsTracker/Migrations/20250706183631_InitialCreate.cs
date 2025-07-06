@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -21,7 +22,7 @@ namespace GoalsTracker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CasesClosed", x => x.Id);
+                    table.PrimaryKey("PK_CaseEntries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,6 +38,18 @@ namespace GoalsTracker.Migrations
                 {
                     table.PrimaryKey("PK_TimeEntries", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CaseEntries_DateClosed",
+                table: "CaseEntries",
+                column: "DateClosed",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TimeEntries_Date",
+                table: "TimeEntries",
+                column: "Date",
+                unique: true);
         }
 
         /// <inheritdoc />
