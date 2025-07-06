@@ -1,0 +1,49 @@
+name: Trigger auto deployment for goalstracker-app-20250706102951
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/goalstracker-app-20250706102951-AutoDeployTrigger-f0d658dd-0dbc-4515-a520-27efa55e3940.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.GOALSTRACKERAPP20250706102951_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.GOALSTRACKERAPP20250706102951_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.GOALSTRACKERAPP20250706102951_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          _targetLabelKey_: _targetLabel_
+          registryUrl: goalstracker20250706103656.azurecr.io
+          registryUsername: ${{ secrets.GOALSTRACKERAPP20250706102951_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.GOALSTRACKERAPP20250706102951_REGISTRY_PASSWORD }}
+          containerAppName: goalstracker-app-20250706102951
+          resourceGroup: goalstracker-app-20250706102951ResourceGroup
+          imageToBuild: goalstracker20250706103656.azurecr.io/goalstracker-app-20250706102951:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
