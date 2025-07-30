@@ -28,14 +28,14 @@
     const form = document.querySelector('form');
     const input = document.querySelector('[name="Entry.CasesClosed"]');
 
-    // Save the original numeric value on page load
+    // Save the numeric portion of the initial value
     const originalValue = input.value.replace(' cases closed', '').trim();
 
     form.addEventListener('submit', function (e) {
-        let value = input.value.replace(' cases closed', '').trim();
+        const numericValue = input.value.replace(' cases closed', '').trim();
 
-        // THROWS AN ERROR WHEN IT GETS ANYTHING OTHER THAN NUMBERS AND RESETS THE INPUT VALUE TO THE ORIGINAL VALUE IF NOT A NUMBER
-        if (!/^\d+$/.test(value)) {
+        // Validate the input contains only digits
+        if (!/^\d+$/.test(numericValue)) {
             e.preventDefault(); // Stop form submission
             alert("Non-numerical characters found. Please try again with whole numbers only.");
             input.value = originalValue; // Reset input to original value
@@ -43,7 +43,7 @@
             return;
         }
 
-        input.value = value; // Strip label before submission
+        input.value = numericValue; // Strip label before submission
     });
 </script>
 
