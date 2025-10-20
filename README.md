@@ -50,8 +50,3 @@ The app automatically creates tables for:
 
 ### Delete Entry Confirmation
 <img width="800" alt="Delete_Confirmation" src="https://github.com/user-attachments/assets/789f959a-6045-4fb4-ae5e-03a229c71901" />
-
-
-
-# Screenshots
-
