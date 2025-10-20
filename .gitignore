@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/GoalsTracker/GoalsTracker.db
+/GoalsTracker/GoalsTracker.db-shm
+/GoalsTracker/GoalsTracker.db-wal
